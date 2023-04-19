@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+
+option  go_package = "github.com/startfromthezero/grpcprotocol/user";
+
+service Greeter {
+  rpc Register (RegisterRequest) returns (RegisterResponse) {}
+  rpc Login(LoginRequest) returns (LoginResponse) {}
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+}
+
+// User注册请求消息
+message RegisterRequest {
+  string username = 1; // 用户名
+  string password = 2; // 密码
+  string email = 3; // 邮箱
+}
+
+// User注册响应消息
+message RegisterResponse {
+  int32 code = 1; // 响应码，0表示成功，其它表示失败
+  string message = 2; // 响应消息
+}
+
+// User登录请求消息
+message LoginRequest {
+  string username = 1; // 用户名
+  string password = 2; // 密码
+}
+
+// User登录响应消息
+message LoginResponse {
+  int32 code = 1; // 响应码，0表示成功，其它表示失败
+  string message = 2; // 响应消息
+}
+
+// User信息查询请求消息
+message GetUserInfoRequest {
+  int64 userId = 1; // 用户ID
+}
+
+// User信息查询响应消息
+message GetUserInfoResponse {
+  int32 code = 1; // 响应码，0表示成功，其它表示失败
+  string message = 2; // 响应消息
+  User user = 3; // 查询到的用户信息
+}
+
+// 定义User信息
+message User {
+  int64 userId = 1; // 用户ID
+  string username = 2; //用户名
+  string email = 3; // 邮箱
+  int32 age = 4; // 年龄
+}
