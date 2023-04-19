@@ -2,12 +2,21 @@ syntax = "proto3";
 
 package user;
 
-option  go_package = "github.com/startfromthezero/grpcprotocol/user";
+option  go_package = "github.com/rpcprotocol/user";
 
 service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloResponse) {}
   rpc Register (RegisterRequest) returns (RegisterResponse) {}
   rpc Login(LoginRequest) returns (LoginResponse) {}
   rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string greeting = 1;
 }
 
 // User注册请求消息
